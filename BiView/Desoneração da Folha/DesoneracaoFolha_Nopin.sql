@@ -127,13 +127,11 @@ SELECT
 			OT.CREATEFINANCIALTRANS = 1 -- Movimenta financeiro
 			AND OT.OPERATIONTYPEID NOT IN (
 				'S5556/6556', 'S5201/6201', 'S5410', 'S5412/6412', 'S5413/6413', 'S5553/6553', 'S5556/6556', 'S5201/6201', 'S413', 'S201', 'S5206', 'DC5201', 'S5413', -- devolução de compra
-				--'S922', 'S5922', 'S6922', 'S5922/6922', -- exclui simples faturamento
 				'S5206/6206', 'S5206' -- anulação de frete
 					)
 				)
 			OR (OT.OPERATIONTYPEID = 'S5902/5124' AND LNF.CFOP = '5.124') -- operação especial Master
 			OR (OT.OPERATIONTYPEID = 'T5902/5124' AND LNF.CFOP = '5.124') -- operação especial Master
-			--OR OT.OPERATIONTYPEID IN ('S116', 'S5116', 'S6116', 'S6118', 'S5116/6116', 'S5117/6117') -- inclui simples remessa
 		)
 
 
