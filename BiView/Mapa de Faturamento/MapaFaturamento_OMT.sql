@@ -12,8 +12,6 @@ SELECT
 		ELSE CONCAT(RIGHT(CONCAT('0', CG.NUM), 2), ' - ', CG.NAME) 
 	END AS "Grupo",
 
-	--CONCAT(CT.ACCOUNTNUM , ' - ', PT.NAME)	AS "Cliente",
-
 	CASE 
 		WHEN CG.NUM IS NULL THEN 
 		
@@ -48,7 +46,7 @@ SELECT
 			FROM 
 		(
 
-				-- Saídas de faturamento (excluindo devoluções de compra e simples faturamento)
+			-- Saídas de faturamento (excluindo devoluções de compra e simples faturamento)
 
 			SELECT 
 				NF.DATAAREAID,
@@ -206,7 +204,6 @@ SELECT
 
 		GROUP BY YEAR(X.FISCALDOCUMENTDATE), X.FISCALDOCUMENTACCOUNTNUM, X.DATAAREAID
 
---		order by 1, 2, 3
 ) AS X
 
 	FULL OUTER JOIN CUSTGOALLINES CGL ON CGL.DATAAREAID = X.EMPRESA AND CGL.CUSTACCOUNT = X.CODIGOCLIENTE 
@@ -217,7 +214,7 @@ SELECT
 GROUP BY CG.YEAR, CG.NUM, CG.NAME, X.EMPRESA, X.ANO
 ) AS X 
 WHERE X.[Valor Faturado] IS NOT NULL OR X.[Valor Planejado] IS NOT NULL
---order by 1, 2
+
 GO
 
 
