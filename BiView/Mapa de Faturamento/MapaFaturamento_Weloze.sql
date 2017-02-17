@@ -1,5 +1,5 @@
 
-ALTER VIEW [BiView].[MapaFaturamento_Weloze] AS
+-- ALTER VIEW [BiView].[MapaFaturamento_Weloze] AS
 
 SELECT * FROM 
 (
