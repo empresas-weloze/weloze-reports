@@ -41,7 +41,7 @@ SELECT
 	CONCAT(X.ITEMID, ' - ', X.ITEMNAME, ' (', X.UNIDADEESTOQUE, ')')	AS "Item (Un. de Estoque)",
 
 	X.FATOR * (X.VALORLINHA + X.IPI + X.ENCARGOS)	AS "Valor Fat. Bruto",
-	X.IPI											AS "Valor IPI",
+	X.FATOR * X.IPI									AS "Valor IPI",
 	X.FATOR * (X.VALORLINHA + X.ENCARGOS)			AS "Valor Rec. Bruta (s/ IPI)"
 
  FROM 
