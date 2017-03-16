@@ -127,7 +127,8 @@ SELECT
 			OT.CREATEFINANCIALTRANS = 1 -- Movimenta financeiro
 			AND OT.OPERATIONTYPEID NOT IN (
 				'S5556/6556', 'S5201/6201', 'S5410', 'S5412/6412', 'S5413/6413', 'S5553/6553', 'S5556/6556', 'S5201/6201', 'S413', 'S201', 'S5206', 'DC5201', 'S5413', -- devolução de compra
-				'S5206/6206', 'S5206' -- anulação de frete
+				'S5206/6206', 'S5206', -- anulação de frete
+				'S5551/6551' -- desconsidera venda de ativo imobilizado
 					)
 				)
 			OR (OT.OPERATIONTYPEID = 'S5902/5124' AND LNF.CFOP = '5.124') -- operação especial Master
