@@ -108,10 +108,13 @@ FROM PURCHTABLE S
 
 WHERE L.DATAAREAID	= 'WELO' AND L.PURCHQTY != 0
 	AND (
-		O.CREATEFINANCIALTRANS = 1 
-		AND O.OPERATIONTYPEID NOT IN (
-			'E1201/2201', 'DV1201/2201', 'E201/202', -- devolução de venda
-			'E1406/2406', 'E1551/2551' -- compra do ativo imobilizado
+		(
+			O.CREATEFINANCIALTRANS = 1 
+			AND O.OPERATIONTYPEID NOT IN (
+				'E1201/2201', 'DV1201/2201', 'E201/202', -- devolução de venda
+				'E1406/2406', 'E1551/2551' -- compra do ativo imobilizado
+			)
+			OR C.ACCOUNTNUM = 'WELO-001029' -- Fornecedor falso p/ Planejamento de MRP
 		)
 	)
 AND S.PURCHSTATUS != 4 -- Cancelada
