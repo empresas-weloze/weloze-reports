@@ -15,6 +15,8 @@ SELECT
 	DATAPAGAMENTO.SEMANA_ANO	AS "Data Pagamento (semana/ano)",
 	DATAPAGAMENTO.MES_ANO		AS "Data Pagamento (mês/ano)",
 
+	DATEDIFF(DAY, DATAEMISSAO.DIA_MES_ANO, DATAVENCIMENTO.DIA_MES_ANO) AS "Prazo de Pagamento",
+
 	CONCAT(X.ACCOUNTNUM, ' - ', PT.NAME) AS "Fornecedor",
 	TRANSACAO.TIPO				AS "Tipo de Transação",
 
