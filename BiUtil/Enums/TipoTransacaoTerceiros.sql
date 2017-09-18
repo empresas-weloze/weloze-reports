@@ -4,13 +4,6 @@ RETURNS TABLE AS
 
 	RETURN 
 	(
-		SELECT CASE @TransType
-
-			WHEN 1		THEN 'Envio'
-			WHEN 2		THEN 'Retorno'
-			WHEN 3		THEN 'Recebimento'
-			WHEN 4		THEN 'Devolução'
-
-		END AS TIPO
+		SELECT BiUtil.Enum2Str('CTTE_InventTransferType', @TransType) AS TIPO
 
 	);
