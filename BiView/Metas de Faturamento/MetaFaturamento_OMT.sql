@@ -4,6 +4,7 @@
 SELECT 
 
 	X.[Data - Mês/Ano],
+	SG.YEAR 			AS "Ano",
 
 	ERC.NAME				AS "Item - Categoria", 
 	X.[Cliente - Segmento]	AS "Cliente - Segmento", 
@@ -24,4 +25,4 @@ RIGHT JOIN SALEGOAL SG ON SG.RECID = SGL.SALEGOAL
 
 WHERE SG.YEAR = YEAR(X.Data) 
 
-GROUP BY ERC.NAME, X.[Cliente - Segmento], X.[Data - Mês/Ano]
+GROUP BY SG.YEAR, ERC.NAME, X.[Cliente - Segmento], X.[Data - Mês/Ano]
