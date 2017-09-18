@@ -10,7 +10,7 @@ RETURNS TABLE AS
 				'3.101', '3.102', '3.127',						
 				'5.201', 
 				'6.201'	
-			) THEN 'Compras para Industrialização'
+			) THEN 'Compras para IndustrializaÃ§Ã£o'
 			ELSE 'Uso e Consumo / Outras Compras'
 		END AS CATEGORIA
 	)
