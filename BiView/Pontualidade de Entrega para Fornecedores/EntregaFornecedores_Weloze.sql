@@ -5,13 +5,13 @@ SELECT
 	
 	CONCAT(V.ACCOUNTNUM, ' - ', PT.NAME)	AS "Fornecedor",
 	P.PURCHID								AS "Ordem de Compra", 
-	L.LINENUMBER							AS "N� Linha", 
+	L.LINENUMBER							AS "Nº Linha", 
 	CONCAT(L.ITEMID, ' - ', T.NAME)			AS "Nome do Item", 
 
 	L.DELIVERYDATE						AS "Dt. Prometida", 
-	DATEADD(DAY, 3, L.DELIVERYDATE)		AS "Dt. M�xima", 
+	DATEADD(DAY, 3, L.DELIVERYDATE)		AS "Dt. Máxima", 
 	VIT.INVOICEDATE						AS "Dt. Entrada", 
-	DATAMESANO.MESANO					AS "Dt. Entrada (m�s/ano)",
+	DATAMESANO.MESANO					AS "Dt. Entrada (mês/ano)",
 
 	CASE WHEN VIT.INVOICEDATE > DATEADD(DAY,3, L.DELIVERYDATE) 
 		THEN 'Em atraso' 

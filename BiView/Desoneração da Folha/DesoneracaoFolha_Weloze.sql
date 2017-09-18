@@ -4,37 +4,37 @@
 SELECT 
 
 	CASE X.PAYROLLDISCHARGEGROUPSTATUS 
-		WHEN 0 THEN '1 - N�o Incentivado'
+		WHEN 0 THEN '1 - Não Incentivado'
 		WHEN 1 THEN '2 - Incentivado'
-		ELSE		'3 - N�o Definido '
-	END AS "Desonera��o",
+		ELSE		'3 - Não Definido '
+	END AS "Desoneração",
 
 	X.[Grupo CFOP/NCM],
 
 	X.TIPO					AS "Nota Fiscal - Tipo",
-	X.FISCALDOCUMENTNUMBER	AS "Nota Fiscal - N�mero",
+	X.FISCALDOCUMENTNUMBER	AS "Nota Fiscal - Número",
 	X.FISCALESTABLISHMENT	AS "Nota Fiscal - Estabelecimento Fiscal",
-	X.NUMLINHA				AS "Nota Fiscal - N�mero da Linha",
+	X.NUMLINHA				AS "Nota Fiscal - Número da Linha",
 
 	X.FISCALDOCUMENTDATE						AS "Data",
-	DATAFILTRO.MESANO							AS "Data - M�s/Ano",
-	DATEPART(ISO_WEEK, X.FISCALDOCUMENTDATE)	AS "Data - N� da Semana",
+	DATAFILTRO.MESANO							AS "Data - Mês/Ano",
+	DATEPART(ISO_WEEK, X.FISCALDOCUMENTDATE)	AS "Data - Nº da Semana",
 
 	CONCAT(X.FISCALDOCUMENTACCOUNTNUM, ' - ', X.CLIENTE) AS "Cliente - Nome",
 
 	X.FISCALCLASSIFICATION	AS "Item - NCM",
 	X.CATEGORIA				AS "Item - Categoria",
 
-	X.OPERATIONTYPEID									AS "Tipo de Opera��o - C�digo",
-	CONCAT(X.OPERATIONTYPEID, ' - ', X.OPERATIONNAME)	AS "Tipo de Opera��o - Descri��o",
+	X.OPERATIONTYPEID									AS "Tipo de Operação - Código",
+	CONCAT(X.OPERATIONTYPEID, ' - ', X.OPERATIONNAME)	AS "Tipo de Operação - Descrição",
 
-	X.CFOPID							AS "CFOP - C�digo",
-	CONCAT(X.CFOPID, ' - ', X.CFOPNAME) AS "CFOP - Descri��o",
+	X.CFOPID							AS "CFOP - Código",
+	CONCAT(X.CFOPID, ' - ', X.CFOPNAME) AS "CFOP - Descrição",
 
 	X.DOCUMENTOORIGINAL AS "Ordem de Compra/Venda",
 	X.GRUPOVENDA		AS "Grupo de Vendas",
 
-	X.ITEMID															AS "Item - C�digo",
+	X.ITEMID															AS "Item - Código",
 	CONCAT(X.ITEMID, ' - ', X.NAMEALIAS)								AS "Item - Nome de Pesquisa",
 	CONCAT(X.ITEMID, ' - ', X.ITEMNAME, ' (', X.UNIDADENF, ')')			AS "Item (Un. da Nota Fiscal)",
 	CONCAT(X.ITEMID, ' - ', X.ITEMNAME, ' (', X.UNIDADEVENDA, ')')		AS "Item (Un. de Venda)",
@@ -47,7 +47,7 @@ SELECT
  FROM 
 (
 
-	-- Sa�das de faturamento (excluindo devolu��es de compra e simples faturamento)
+	-- Saídas de faturamento (excluindo devoluções de compra e simples faturamento)
 
 	SELECT P.RECID AS ECORESPRODUCTID,
 		NF.STATUS,
@@ -124,23 +124,23 @@ SELECT
 	WHERE 1=1 
 		AND LNF.DATAAREAID = 'WELO'
 		AND NF.STATUS = 1 -- Status da Nota Fiscal = Aprovado
-		AND NF.DIRECTION = 2 -- Dire��o Sa�da
+		AND NF.DIRECTION = 2 -- Direção Saída
 		AND (( 
 			OT.CREATEFINANCIALTRANS = 1 -- Movimenta financeiro
 			AND OT.OPERATIONTYPEID NOT IN (
-				'S5556/6556', 'S5201/6201', 'S5410', 'S5412/6412', 'S5413/6413', 'S5553/6553', 'S5556/6556', 'S5201/6201', 'S413', 'S201', 'S5206', 'DC5201', 'S5413', -- devolu��o de compra
-				'S5206/6206', 'S5206', -- anula��o de frete
+				'S5556/6556', 'S5201/6201', 'S5410', 'S5412/6412', 'S5413/6413', 'S5553/6553', 'S5556/6556', 'S5201/6201', 'S413', 'S201', 'S5206', 'DC5201', 'S5413', -- devolução de compra
+				'S5206/6206', 'S5206', -- anulação de frete
 				'S5551/6551' -- desconsidera venda de ativo imobilizado
 					)
 				)
-			OR (OT.OPERATIONTYPEID = 'S5902/5124' AND LNF.CFOP = '5.124') -- opera��o especial Master
-			OR (OT.OPERATIONTYPEID = 'T5902/5124' AND LNF.CFOP = '5.124') -- opera��o especial Master
+			OR (OT.OPERATIONTYPEID = 'S5902/5124' AND LNF.CFOP = '5.124') -- operação especial Master
+			OR (OT.OPERATIONTYPEID = 'T5902/5124' AND LNF.CFOP = '5.124') -- operação especial Master
 		)
 
 
 	UNION
 
-	-- Ordens de Devolu��o
+	-- Ordens de Devolução
 
 	SELECT P.RECID AS ECORESPRODUCTID,
 		NF.STATUS,
@@ -224,13 +224,13 @@ SELECT
 				'S5102', 'S5116', 'S5116/6116', 'S5122/6122', 'S5124/5125', 'S5124/S5125', 'S5501/6501', 'S5118', 'S5118/6118', 
 				'S5551/6551', 'S6101', 'S6101 001', 'S6116', 'S6118', 'S6122', 'S6124/6125', 'S7101/7127', 'S933', 
 				'SFERRAM.RA', 'SFERRAMENT', 'SSUCATAS'))
-			OR (OT.OPERATIONTYPEID = 'S5902/5124' AND LNF.CFOP = '1.949') -- opera��o especial Master
-			OR (OT.OPERATIONTYPEID = 'T5902/5124' AND LNF.CFOP = '1.949') -- opera��o especial Master
+			OR (OT.OPERATIONTYPEID = 'S5902/5124' AND LNF.CFOP = '1.949') -- operação especial Master
+			OR (OT.OPERATIONTYPEID = 'T5902/5124' AND LNF.CFOP = '1.949') -- operação especial Master
 		)
 		
 	UNION
 
-	-- Devolu��es por Ordem de Compra
+	-- Devoluções por Ordem de Compra
 
 	SELECT P.RECID AS ECORESPRODUCTID,
 		NF.STATUS,
@@ -255,7 +255,7 @@ SELECT
 		IISSQN.VALOR AS ISSQN,
 		ENCARGO.ENCARGO AS ENCARGOS,
 		-1 AS FATOR,
-		'Devolu��o por Ordem de Compra' AS TIPO,
+		'Devolução por Ordem de Compra' AS TIPO,
 		LNF.LINENUM AS NUMLINHA,
 		CATEGORIA.CATEGORIA,
 		LNF.QUANTITY,
